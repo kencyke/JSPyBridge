@@ -1,0 +1,32 @@
+{
+    "build": {
+        "dockerfile": "./Dockerfile"
+    },
+    "containerEnv": {
+        "GITHUB_WORKSPACE": "${containerWorkspaceFolder}"
+    },
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/home/vscode/.venv/bin/python",
+                "python.terminal.activateEnvInCurrentTerminal": true
+            }
+        }
+    },
+    "mounts": [
+        {"source": "${localWorkspaceFolderBasename}-bashhistory", "target": "/commandhistory", "type": "volume"}
+    ],
+    "runArgs": [
+        "--init",
+        "--net=host"
+    ],
+    "postCreateCommand": "python3 -m venv /home/vscode/.venv"
+}
